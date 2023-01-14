@@ -1,4 +1,4 @@
-import 'package:date_time/date_time.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -87,6 +87,7 @@ class _SalesReportState extends State<SalesReport> {
                       },
                     ),
                   ),
+                 const SizedBox(height: 20,),
                   ElevatedButton(
                       onPressed: () {}, child: const Text('Generate'))
                 ],

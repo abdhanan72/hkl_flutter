@@ -1,4 +1,8 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hakl/login/login.dart';
 import 'package:hakl/salesReport/sales_report.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,6 +10,36 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showdialog() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: const Text('Logout'),
+            content: const Text('Are you sure you want to logout?'),
+            actions: [
+              MaterialButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Login(),
+                      ));
+                },
+                child: const Text('Yes'),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('No'),
+              )
+            ],
+          );
+        },
+      );
+    }
+
     return Container(
       color: const Color(0xff000080),
       child: SafeArea(
@@ -14,7 +48,7 @@ class HomePage extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Center(
@@ -56,7 +90,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SalesReport(),
+                              builder: (context) => const SalesReport(),
                             ));
                       },
                       child: Padding(
@@ -68,7 +102,7 @@ class HomePage extends StatelessWidget {
                               height: 80,
                               width: 80,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -88,7 +122,7 @@ class HomePage extends StatelessWidget {
                             height: 80,
                             width: 80,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
@@ -111,7 +145,7 @@ class HomePage extends StatelessWidget {
                             height: 80,
                             width: 80,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
@@ -142,7 +176,7 @@ class HomePage extends StatelessWidget {
                             height: 80,
                             width: 80,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
@@ -156,26 +190,31 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Image.asset(
-                              'assets/logout.png',
-                              height: 80,
-                              width: 80,
+                    InkWell(
+                      onTap: () {
+                        _showdialog();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Image.asset(
+                                'assets/logout.png',
+                                height: 80,
+                                width: 80,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Logout',
-                            style: TextStyle(color: Colors.grey.shade800),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Logout',
+                              style: TextStyle(color: Colors.grey.shade800),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
