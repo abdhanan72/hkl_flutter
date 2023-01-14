@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,11 +19,9 @@ class HomePage extends StatelessWidget {
             actions: [
               MaterialButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Login(),
-                      ));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const Login(),
+                  ));
                 },
                 child: const Text('Yes'),
               ),
