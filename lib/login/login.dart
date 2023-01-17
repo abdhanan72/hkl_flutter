@@ -50,7 +50,11 @@ class _LoginState extends State<Login> {
 
   Future<void> checkLogin() async {
     if (await isLoggedIn()) {
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const HomePage(),));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
     }
   }
 
@@ -166,7 +170,17 @@ class _LoginState extends State<Login> {
                             ),
                             ElevatedButton(
                               onPressed: () async {
+
+                                   hasinternet = await InternetConnectionChecker()
+                                    .hasConnection;
+
+                                if (hasinternet == false) {
+                                  _showdialog();
+                                }
+
                                 final response = await login();
+                               
+
                                 if (response.statusCode == 200) {
                                   final responseBody =
                                       jsonDecode(response.body);
