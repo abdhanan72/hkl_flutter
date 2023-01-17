@@ -46,6 +46,7 @@ dependencies:
   open_settings: ^2.0.2
   lottie_flutter: ^0.2.0
   lottie: ^2.2.0
+  shared_preferences: ^2.0.16
 
 dev_dependencies:
   flutter_test:

@@ -1,10 +1,11 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hakl/login/login.dart';
 import 'package:hakl/salesReport/sales_report.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -17,18 +18,21 @@ class HomePage extends StatelessWidget {
           return CupertinoAlertDialog(
             title: const Text('Logout',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            content:Column(
+            content: Column(
               children: [
                 Lottie.asset('assets/90919-logout.json'),
-                Text('Are you sure you want to logout?',)
+                const Text(
+                  'Are you sure you want to logout?',
+                )
               ],
             ),
             actions: [
               MaterialButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const Login(),
-                  ));
+                  
+                  Navigator.pop(context, true);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Login()));
                 },
                 child: const Text('Yes'),
               ),
@@ -195,8 +199,11 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
                         _showdialog();
+                        SharedPreferences pref =
+                            await SharedPreferences.getInstance();
+                        await pref.clear();
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),

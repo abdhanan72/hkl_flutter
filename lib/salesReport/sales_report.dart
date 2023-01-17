@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -51,7 +50,7 @@ class _SalesReportState extends State<SalesReport> {
                             fromdate.text = formateddate.toString();
                           });
                         } else {
-                          print('Invalid date');
+                          
                         }
                       },
                     ),
@@ -77,7 +76,8 @@ class _SalesReportState extends State<SalesReport> {
                             lastDate: DateTime(2100));
 
                         if (pickeddate != null) {
-                          String formatdate = DateFormat("dd-MM-yyyy").format(pickeddate);
+                          String formatdate =
+                              DateFormat("dd-MM-yyyy").format(pickeddate);
                           setState(() {
                             todate.text = formatdate.toString();
                           });
@@ -87,9 +87,14 @@ class _SalesReportState extends State<SalesReport> {
                       },
                     ),
                   ),
-                 const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   ElevatedButton(
-                      onPressed: () {}, child: const Text('Generate'))
+                      onPressed: () {
+                      
+
+                      }, child: const Text('Generate'))
                 ],
               )
             ],
