@@ -39,6 +39,13 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.4.43
   date_time: ^0.9.0
   intl: ^0.18.0
+  http: ^0.13.5
+  connectivity_plus: ^3.0.2
+  internet_connection_checker: ^1.0.0+1
+  motion_toast: ^2.6.4
+  open_settings: ^2.0.2
+  lottie_flutter: ^0.2.0
+  lottie: ^2.2.0
 
 dev_dependencies:
   flutter_test:

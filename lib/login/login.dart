@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hakl/home/home.dart';
-
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:open_settings/open_settings.dart';
+import 'package:lottie/lottie.dart';
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -9,6 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool hasinternet = false;
   bool _obscuretext = true;
   void _toggle() {
     setState(() {
@@ -92,12 +97,20 @@ class _LoginState extends State<Login> {
                             height: 30,
                           ),
                           ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const HomePage(),
-                                    ));
+                              onPressed: () async {
+                                hasinternet = await InternetConnectionChecker()
+                                    .hasConnection;
+
+                                if (hasinternet == false) {
+                                  _showdialog();
+                                } else {
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      ));
+                                }
                               },
                               child: const Text('SIGN IN'))
                         ],
@@ -111,6 +124,39 @@ class _LoginState extends State<Login> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showdialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Lottie.asset('assets/45721-no-internet.json',width: 100,height: 100),
+          content:
+              const Text('Please check your internet connection and try again'),
+          actions: [
+            MaterialButton(
+              onPressed: () {
+                OpenSettings.openNetworkOperatorSetting();
+              },
+              child: const Text('Turn on mobile data'),
+            ),
+            MaterialButton(
+              onPressed: () {
+                OpenSettings.openWIFISetting();
+              },
+              child: const Text('Turn on wifi'),
+            ),
+            MaterialButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

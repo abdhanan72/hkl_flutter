@@ -1,9 +1,10 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hakl/login/login.dart';
 import 'package:hakl/salesReport/sales_report.dart';
-
+import 'package:lottie/lottie.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -14,8 +15,14 @@ class HomePage extends StatelessWidget {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: const Text('Logout'),
-            content: const Text('Are you sure you want to logout?'),
+            title: const Text('Logout',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            content:Column(
+              children: [
+                Lottie.asset('assets/90919-logout.json'),
+                Text('Are you sure you want to logout?',)
+              ],
+            ),
             actions: [
               MaterialButton(
                 onPressed: () {
