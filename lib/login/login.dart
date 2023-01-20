@@ -32,12 +32,17 @@ class _LoginState extends State<Login> {
 
   late SharedPreferences prefs;
 
-  void _saveForm() async {
+  void _saveForm(http.Response response) async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       prefs = await SharedPreferences.getInstance();
       await prefs.setString('username', unm);
       await prefs.setString('password', pwd);
+      var jsonData = jsonDecode(response.body);
+      if (jsonData["response_code"] == 27) {
+        var fid = jsonData["data"]["firm_id"];
+        await prefs.setString('firm_id', fid);
+      }
       await prefs.setBool('isLoggedIn', true);
     }
   }
@@ -62,6 +67,11 @@ class _LoginState extends State<Login> {
     prefs = await SharedPreferences.getInstance();
     final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     return isLoggedIn;
+  }
+
+  Future<void> saveResponseToSharedPreferences(String responseBody) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('data', responseBody);
   }
 
   Future<http.Response> login() async {
@@ -170,8 +180,7 @@ class _LoginState extends State<Login> {
                             ),
                             ElevatedButton(
                               onPressed: () async {
-
-                                   hasinternet = await InternetConnectionChecker()
+                                hasinternet = await InternetConnectionChecker()
                                     .hasConnection;
 
                                 if (hasinternet == false) {
@@ -179,13 +188,12 @@ class _LoginState extends State<Login> {
                                 }
 
                                 final response = await login();
-                               
 
                                 if (response.statusCode == 200) {
                                   final responseBody =
                                       jsonDecode(response.body);
                                   if (responseBody['response_code'] == 27) {
-                                    _saveForm();
+                                    _saveForm(response);
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -206,7 +214,7 @@ class _LoginState extends State<Login> {
                                   ));
                                 }
                               },
-                              child: Text('Login'),
+                              child: const Text('Login'),
                             )
                           ],
                         ))),

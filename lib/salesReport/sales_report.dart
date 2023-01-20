@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hakl/salesReport/apicall.dart';
+import 'package:hakl/salesReport/report_sales/report_sales.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SalesReport extends StatefulWidget {
   const SalesReport({super.key});
@@ -11,6 +14,25 @@ class SalesReport extends StatefulWidget {
 class _SalesReportState extends State<SalesReport> {
   TextEditingController fromdate = TextEditingController(),
       todate = TextEditingController();
+  String ti = DateTime.now().millisecondsSinceEpoch.toString();
+  String? firmId;
+  List<Datum> data = [];
+  int? dataLength;
+  Future<String?> getFirmId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? firmId = await prefs.getString('firm_id');
+    return firmId;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getFirmId().then((value) {
+      setState(() {
+        firmId = value!;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +71,7 @@ class _SalesReportState extends State<SalesReport> {
                           setState(() {
                             fromdate.text = formateddate.toString();
                           });
-                        } else {
-                          
-                        }
+                        } else {}
                       },
                     ),
                   ),
@@ -91,10 +111,52 @@ class _SalesReportState extends State<SalesReport> {
                     height: 20,
                   ),
                   ElevatedButton(
-                      onPressed: () {
-                      
+                      onPressed: () async {
+                        final result = await fetchdata(
+                            fid: firmId.toString(),
+                            frdt: fromdate.text,
+                            todt: todate.text,
+                            t: ti);
 
-                      }, child: const Text('Generate'))
+                            
+                      },
+                      child: const Text('Generate')),
+
+
+                      
+                 FutureBuilder<Reportsales>(
+   future: fetchdata(fid: firmId.toString(),
+                            frdt: fromdate.text,
+                            todt: todate.text,
+                            t: ti),
+   builder: (BuildContext context, AsyncSnapshot<Reportsales> snapshot) {
+     if (snapshot.hasData) {
+       final data = snapshot.data?.data;
+        
+         return Expanded(
+           child: SizedBox(
+            height: 200,
+             child: ListView.builder(
+              itemCount: data!.length,
+              itemBuilder: (BuildContext context, int index) {
+                final Datum datum = data[index];
+                return ListTile(
+                  title: Text(datum.the0),
+                  subtitle: Text(datum.the1),
+                  trailing: Text(datum.custName),
+                );
+              },
+                   ),
+           ),
+         );
+       
+     } else if (snapshot.hasError) {
+       return Text("${snapshot.error}");
+     }
+     return const CircularProgressIndicator();
+   },
+ ),
+
                 ],
               )
             ],

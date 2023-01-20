@@ -29,7 +29,6 @@ class HomePage extends StatelessWidget {
             actions: [
               MaterialButton(
                 onPressed: () {
-                  
                   Navigator.pop(context, true);
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => Login()));
