@@ -50,6 +50,7 @@ dependencies:
   json_annotation: ^4.8.0
   build_runner_core: ^7.2.7
   json_serializable: ^6.6.0
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

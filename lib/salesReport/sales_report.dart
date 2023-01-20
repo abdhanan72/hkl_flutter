@@ -114,46 +114,70 @@ class _SalesReportState extends State<SalesReport> {
                         frdt: fromdate.text,
                         todt: todate.text,
                         t: ti);
-
-                        
                   },
                   child: const Text('Generate')),
+              FutureBuilder<Reportsales>(
+                future: fetchdata(
+                    fid: firmId.toString(),
+                    frdt: fromdate.text,
+                    todt: todate.text,
+                    t: ti),
+                builder: (BuildContext context,
+                    AsyncSnapshot<Reportsales> snapshot) {
+                  if (snapshot.hasData) {
+                    final data = snapshot.data?.data;
 
-
-                  
-             FutureBuilder<Reportsales>(
-   future: fetchdata(fid: firmId.toString(),
-                        frdt: fromdate.text,
-                        todt: todate.text,
-                        t: ti),
-   builder: (BuildContext context, AsyncSnapshot<Reportsales> snapshot) {
-     if (snapshot.hasData) {
-       final data = snapshot.data?.data;
-        
-         return Expanded(
-           child: SizedBox(
-            height: 200,
-             child: ListView.builder(
-          itemCount: data!.length,
-          itemBuilder: (BuildContext context, int index) {
-            final Datum datum = data[index];
-            return ListTile(
-              title: Text(datum.the0),
-              subtitle: Text(datum.the1),
-              trailing: Text(datum.custName),
-            );
-          },
-               ),
-           ),
-         );
-       
-     } else if (snapshot.hasError) {
-       return Text("${snapshot.error}");
-     }
-     return const CircularProgressIndicator();
-   },
- ),
-
+                    return Expanded(
+                      child: SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                          itemCount: data!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final Datum datum = data[index];
+                            // return ListTile(
+                            //   title: Text(datum.the0),
+                            //   subtitle: Text(datum.the1),
+                            //   trailing: Text(datum.custName),
+                            // );
+                            return SizedBox(height: 80,
+                              child: Container(
+                                height: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left:8.0),
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(datum.cost),
+                                          Text(datum.datex.toString())
+                                        ],
+                                      ),
+                                      const SizedBox(height: 5,),
+                                      Text(datum.custName),
+                                     const SizedBox(height: 5,),
+                                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(datum.invamt),
+                                          Text(datum.cost),
+                                          Text(datum.profit),
+                                        ],
+                                      ),
+                                     const Divider(color: Colors.black,)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("");
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
             ],
           ),
         ),
