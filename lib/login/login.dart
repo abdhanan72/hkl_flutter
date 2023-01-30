@@ -42,6 +42,8 @@ class _LoginState extends State<Login> {
       if (jsonData["response_code"] == 27) {
         var fid = jsonData["data"]["firm_id"];
         await prefs.setString('firm_id', fid);
+        var fullname = jsonData["data"]["fullname"];
+        await prefs.setString('fullname', fullname);
       }
       await prefs.setBool('isLoggedIn', true);
     }
