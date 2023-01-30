@@ -16,6 +16,7 @@ class _SalesReportState extends State<SalesReport> {
       todate = TextEditingController();
   String ti = DateTime.now().millisecondsSinceEpoch.toString();
   String? firmId;
+  bool _isLoading = false;
   List<Datum> data = [];
   int? dataLength;
   Future<String?> getFirmId() async {
@@ -64,7 +65,7 @@ class _SalesReportState extends State<SalesReport> {
 
                     if (pickdate != null) {
                       String formateddate =
-                          DateFormat("dd-MM-yyyy").format(pickdate);
+                          DateFormat("yyyy-MM-dd").format(pickdate);
                       setState(() {
                         fromdate.text = formateddate.toString();
                       });
@@ -94,7 +95,7 @@ class _SalesReportState extends State<SalesReport> {
 
                     if (pickeddate != null) {
                       String formatdate =
-                          DateFormat("dd-MM-yyyy").format(pickeddate);
+                          DateFormat("yyyy-MM-dd").format(pickeddate);
                       setState(() {
                         todate.text = formatdate.toString();
                       });
@@ -108,15 +109,13 @@ class _SalesReportState extends State<SalesReport> {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () async {
-                    final result = await fetchdata(
-                        fid: firmId.toString(),
-                        frdt: fromdate.text,
-                        todt: todate.text,
-                        t: ti);
+                  onPressed: () {
+                    setState(() {
+                      _isLoading = true;
+                    });
                   },
                   child: const Text('Generate')),
-              FutureBuilder<Reportsales>(
+            if(_isLoading)  FutureBuilder<Reportsales>(
                 future: fetchdata(
                     fid: firmId.toString(),
                     frdt: fromdate.text,
@@ -139,30 +138,43 @@ class _SalesReportState extends State<SalesReport> {
                             //   subtitle: Text(datum.the1),
                             //   trailing: Text(datum.custName),
                             // );
-                            return SizedBox(height: 80,
+                            return SizedBox(
+                              height: 80,
                               child: Container(
                                 height: 100,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left:8.0),
-                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(datum.cost),
-                                          Text(datum.datex.toString())
+                                          Text("#: ${datum.gstinv}"),
+                                          Text("Dt:${datum.datex.toString()}")
                                         ],
                                       ),
-                                      const SizedBox(height: 5,),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
                                       Text(datum.custName),
-                                     const SizedBox(height: 5,),
-                                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(datum.invamt),
-                                          Text(datum.cost),
-                                          Text(datum.profit),
+                                          Text("Amt: ${datum.invamt}"),
+                                          Text("Cost: ${datum.cost}"),
+                                          Text("Profit: ${datum.profit}"),
                                         ],
                                       ),
-                                     const Divider(color: Colors.black,)
+                                      const Divider(
+                                        color: Colors.black,
+                                      )
                                     ],
                                   ),
                                 ),
@@ -173,7 +185,7 @@ class _SalesReportState extends State<SalesReport> {
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return Text("");
+                    return const Text("Error Loading Data");
                   }
                   return const CircularProgressIndicator();
                 },

@@ -25,4 +25,3 @@ Future<Reportsales> fetchdata(
     throw Exception('Failed to load data');
   }
 }
-
