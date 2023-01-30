@@ -195,6 +195,8 @@ class _LoginState extends State<Login> {
                                   final responseBody =
                                       jsonDecode(response.body);
                                   if (responseBody['response_code'] == 27) {
+                                      var fullname = responseBody["data"]["fullname"];
+        await prefs.setString('fullname', fullname);
                                     _saveForm(response);
                                     Navigator.pushReplacement(
                                         context,

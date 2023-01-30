@@ -13,26 +13,21 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-
-
 class _HomePageState extends State<HomePage> {
+  String? name;
 
-
-String? fullname;
-
-@override
+  @override
   void initState() {
     super.initState();
     _loadFullName();
   }
 
- _loadFullName() async {
+  _loadFullName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      fullname = prefs.getString('fullname');
+      name = prefs.getString('fullname') ?? '';
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +96,8 @@ String? fullname;
                             const SizedBox(
                               height: 15,
                             ),
-                             Text(
-                              fullname!,
+                            Text(
+                              name!,
                               style: const TextStyle(
                                   color: Color(0xff000080), fontSize: 25),
                             )
