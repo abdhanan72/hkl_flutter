@@ -145,36 +145,53 @@ class _SalesReportState extends State<SalesReport> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Column(
+                                    
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      const SizedBox(
+                                        height: 3,
+                                        width: 345,
+                                        child: Divider(thickness: 1.3,
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text("#: ${datum.gstinv}"),
-                                          Text("Dt:${datum.datex.toString()}")
+                                          Padding(
+                                            padding: const EdgeInsets.only(right:8.0),
+                                            child: Text(
+                                                  "Dt:${DateFormat('MM-dd-yyyy HH:mm').format(datum.datex)}"),
+                                          )
+
                                         ],
                                       ),
                                       const SizedBox(
-                                        height: 5,
+                                        height: 8,
                                       ),
                                       Text(datum.custName),
                                       const SizedBox(
-                                        height: 5,
+                                        height: 8,
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Amt: ${datum.invamt}"),
-                                          Text("Cost: ${datum.cost}"),
-                                          Text("Profit: ${datum.profit}"),
-                                        ],
+                                      Padding(
+                                        padding: const EdgeInsets.only(right:3.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Amt: ${datum.invamt}"),
+                                            Text("Cost: ${datum.cost}"),
+                                            Padding(
+                                              padding: const EdgeInsets.only(right:8.0),
+                                              child: Text("Profit: ${datum.profit}"),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      const Divider(
-                                        color: Colors.black,
-                                      )
+                                      
                                     ],
                                   ),
                                 ),

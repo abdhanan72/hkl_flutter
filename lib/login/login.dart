@@ -1,9 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
-
+import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hakl/home/home.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:open_settings/open_settings.dart';
@@ -53,6 +54,7 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     checkLogin();
+    
   }
 
   Future<void> checkLogin() async {
@@ -92,143 +94,142 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.only(top: 100.0),
-                  child:
-                      Image.asset('assets/hklogo.png', height: 150, width: 150),
-                )),
-                SizedBox(
-                    height: 360,
-                    width: 310,
-                    child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        elevation: 6,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Center(
-                                child: Padding(
-                              padding: EdgeInsets.only(top: 25.0),
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 25),
-                              ),
-                            )),
-                            const SizedBox(
-                              height: 20,
+        resizeToAvoidBottomInset: false,
+        body: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                  child: Padding(
+                padding:  EdgeInsets.only(top: 100.sp),
+                child:
+                    Image.asset('assets/hklogo.png', height: 120.h, width: 120.w),
+              )),
+              SizedBox(
+                  height: 360.h,
+                  width: 310.w,
+                  child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r)),
+                      elevation: 6,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                           Center(
+                              child: Padding(
+                            padding: EdgeInsets.only(top: 25.sp),
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25.sp),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: TextFormField(
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please Enter a username';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) => unm = value!,
-                                  decoration: const InputDecoration(
-                                      labelText: 'Username',
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                        color: Color(0xff000080),
-                                        width: 1,
-                                      )))),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: TextFormField(
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter a password';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) => pwd = value!,
-                                  obscureText: _obscuretext,
-                                  decoration: InputDecoration(
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          _obscuretext
-                                              ? Icons.remove_red_eye_outlined
-                                              : Icons.visibility_off,
-                                          color: const Color(0xff000080),
-                                        ),
-                                        onPressed: _toggle,
-                                      ),
-                                      labelText: 'Password',
-                                      border: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                        color: Color(0xff000080),
-                                        width: 1,
-                                      )))),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                hasinternet = await InternetConnectionChecker()
-                                    .hasConnection;
-
-                                if (hasinternet == false) {
-                                  _showdialog();
-                                }
-
-                                final response = await login();
-
-                                if (response.statusCode == 200) {
-                                  final responseBody =
-                                      jsonDecode(response.body);
-                                  if (responseBody['response_code'] == 27) {
-                                      var fullname = responseBody["data"]["fullname"];
-        await prefs.setString('fullname', fullname);
-                                    _saveForm(response);
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomePage(),
-                                        ));
-                                  } else {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content:
-                                          Text(responseBody['response_desc']),
-                                    ));
+                          )),
+                           SizedBox(
+                            height: 20.h,
+                          ),
+                          Padding(
+                            padding:
+                                 EdgeInsets.symmetric(horizontal: 10.sp),
+                            child: TextFormField(
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please Enter a username';
                                   }
+                                  return null;
+                                },
+                                onSaved: (value) => unm = value!,
+                                decoration:  InputDecoration(
+                                    labelText: 'Username',
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                      color: const Color(0xff000080),
+                                      width: 1.sp,
+                                    )))),
+                          ),
+                           SizedBox(
+                            height: 30.h,
+                          ),
+                          Padding(
+                            padding:
+                                 EdgeInsets.symmetric(horizontal: 10.sp),
+                            child: TextFormField(
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a password';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value) => pwd = value!,
+                                obscureText: _obscuretext,
+                                decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _obscuretext
+                                            ? Icons.remove_red_eye_outlined
+                                            : Icons.visibility_off,
+                                        color: const Color(0xff000080),
+                                      ),
+                                      onPressed: _toggle,
+                                    ),
+                                    labelText: 'Password',
+                                    border:  OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                      color: const Color(0xff000080),
+                                      width: 1.w,
+                                    )))),
+                          ),
+                           SizedBox(
+                            height: 30.h,
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              hasinternet = await InternetConnectionChecker()
+                                  .hasConnection;
+
+                              if (hasinternet == false) {
+                                _showdialog();
+                              }
+
+                              final response = await login();
+
+                              if (response.statusCode == 200) {
+                                final responseBody =
+                                    jsonDecode(response.body);
+                                if (responseBody['response_code'] == 27) {
+                                    var fullname = responseBody["data"]["fullname"];
+        await prefs.setString('fullname', fullname);
+                                  _saveForm(response);
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HomePage(),
+                                      ));
                                 } else {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text('Login Failed'),
+                                      .showSnackBar(SnackBar(
+                                    content:
+                                        Text(responseBody['response_desc']),
                                   ));
                                 }
-                              },
-                              child: const Text('Login'),
-                            )
-                          ],
-                        ))),
-                Image.asset(
-                  'assets/splogo.png',
-                  height: 180,
-                  width: 180,
-                )
-              ],
-            ),
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text('Login Failed'),
+                                ));
+                              }
+                            },
+                            child: const Text('Login'),
+                          )
+                        ],
+                      ))),
+              Image.asset(
+                'assets/splogo.png',
+                height: 180.h,
+                width: 180.w,
+              )
+            ],
           ),
         ),
       ),

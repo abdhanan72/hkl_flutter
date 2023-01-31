@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hakl/login/login.dart';
 import 'package:hakl/salesReport/sales_report.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../CustomerSummary/customersummary.dart';
+import '../Itemsummary/itemsummary.dart';
+import '../Itemsummary/model/itemsalesum.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -55,40 +60,40 @@ class HomePage extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 10,
+               SizedBox(
+                height: 10.h,
               ),
               Center(
                   child: SizedBox(
-                      height: 150,
-                      width: 340,
+                      height: 150.h,
+                      width: 340.w,
                       child: Card(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(20.r)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(
                               'assets/hklogo.png',
-                              height: 90,
-                              width: 90,
+                              height: 90.h,
+                              width: 90.h,
                             ),
-                            const SizedBox(
-                              height: 15,
+                             SizedBox(
+                              height: 15.h,
                             ),
-                            const Text(
+                             Text(
                               'ADMIN POTATALLO',
                               style: TextStyle(
-                                  color: Color(0xff000080), fontSize: 25),
+                                  color: const Color(0xff000080), fontSize: 25.sp),
                             )
                           ],
                         ),
                       ))),
-              const SizedBox(
-                height: 30,
+               SizedBox(
+                height: 30.h,
               ),
               Padding(
-                padding: const EdgeInsets.all(17.0),
+                padding:  EdgeInsets.all(7.sp),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -101,98 +106,108 @@ class HomePage extends StatelessWidget {
                             ));
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:  EdgeInsets.all(8.0.sp),
                         child: Column(
                           children: [
                             Image.asset(
                               'assets/sales.png',
-                              height: 80,
-                              width: 80,
+                              height: 80.h,
+                              width: 80.w,
                             ),
-                            const SizedBox(
-                              height: 10,
+                             SizedBox(
+                              height: 10.h,
                             ),
                             Text(
                               'Sales Report',
-                              style: TextStyle(color: Colors.grey.shade800),
+                              style: TextStyle(
+                                  color: Colors.grey.shade800, fontSize: 15.sp),
                             )
                           ],
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/target.png',
-                            height: 80,
-                            width: 80,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Customer',
-                            style: TextStyle(color: Colors.grey.shade800),
-                          ),
-                          Text(
-                            'Sales Summary',
-                            style: TextStyle(color: Colors.grey.shade800),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerSalesSummary())),
+                      child: Padding(
+                        padding:  EdgeInsets.all(8.sp),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/target.png',
+                              height: 80.h,
+                              width: 80.w,
+                            ),
+                             SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              'Customer',
+                              style: TextStyle(color: Colors.grey.shade800,fontSize: 15.sp),
+                            ),
+                            Text(
+                              'Sales Summary',
+                              style: TextStyle(color: Colors.grey.shade800, fontSize: 15.sp),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/deliverybox.png',
-                            height: 80,
-                            width: 80,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Customer',
-                            style: TextStyle(color: Colors.grey.shade800),
-                          ),
-                          Text(
-                            'Sales Summary',
-                            style: TextStyle(color: Colors.grey.shade800),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () => Navigator.push(context,MaterialPageRoute(builder:(context) => const ItemSalesSummary())),
+                      child: Padding(
+                        padding:  EdgeInsets.all(8.sp),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/deliverybox.png',
+                              height: 80.h,
+                              width: 80.w,
+                            ),
+                             SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              'Items',
+                              style: TextStyle(
+                                  color: Colors.grey.shade800, fontSize: 15.sp),
+                            ),
+                            Text(
+                              'Sales Summary',
+                              style: TextStyle(
+                                  color: Colors.grey.shade800, fontSize: 15.sp),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(17),
+                padding:  EdgeInsets.all(5.sp),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.all(8.sp),
                       child: Column(
                         children: [
                           Image.asset(
                             'assets/warehouse.png',
-                            height: 80,
-                            width: 80,
+                            height: 80.h,
+                            width: 80.w,
                           ),
-                          const SizedBox(
-                            height: 10,
+                           SizedBox(
+                            height: 10.h,
                           ),
                           Text(
                             'Current Stock',
-                            style: TextStyle(color: Colors.grey.shade800),
+                            style: TextStyle(
+                                color: Colors.grey.shade800, fontSize: 15.sp),
                           ),
                           Text(
                             'Report',
-                            style: TextStyle(color: Colors.grey.shade800),
+                            style: TextStyle(color: Colors.grey.shade800,fontSize: 15.sp),
                           )
                         ],
                       ),
@@ -205,23 +220,24 @@ class HomePage extends StatelessWidget {
                         await pref.clear();
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:  EdgeInsets.all(8.sp),
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
+                              padding:  EdgeInsets.only(left: 10.sp),
                               child: Image.asset(
                                 'assets/logout.png',
-                                height: 80,
-                                width: 80,
+                                height: 80.h,
+                                width: 80.w,
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
+                             SizedBox(
+                              height: 10.h,
                             ),
                             Text(
                               'Logout',
-                              style: TextStyle(color: Colors.grey.shade800),
+                              style: TextStyle(
+                                  color: Colors.grey.shade800, fontSize: 15.sp),
                             ),
                           ],
                         ),
