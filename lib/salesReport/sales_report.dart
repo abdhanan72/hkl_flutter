@@ -185,7 +185,7 @@ class _SalesReportState extends State<SalesReport> {
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return const Text("Error Loading Data");
+                    return const Text("Not a valid date ");
                   }
                   return const CircularProgressIndicator();
                 },

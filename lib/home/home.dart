@@ -6,28 +6,8 @@ import 'package:hakl/salesReport/sales_report.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  String? name;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadFullName();
-  }
-
-  _loadFullName() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      name = prefs.getString('fullname') ?? '';
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +76,9 @@ class _HomePageState extends State<HomePage> {
                             const SizedBox(
                               height: 15,
                             ),
-                            Text(
-                              name!,
-                              style: const TextStyle(
+                            const Text(
+                              'ADMIN POTATALLO',
+                              style: TextStyle(
                                   color: Color(0xff000080), fontSize: 25),
                             )
                           ],
