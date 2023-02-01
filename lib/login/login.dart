@@ -101,11 +101,7 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
-                  child: Padding(
-                padding:  EdgeInsets.only(top: 100.sp),
-                child:
-                    Image.asset('assets/hklogo.png', height: 120.h, width: 120.w),
-              )),
+                  child: Image.asset('assets/hklogo.png', height: 120.h, width: 120.w)),
               SizedBox(
                   height: 360.h,
                   width: 310.w,
@@ -118,7 +114,7 @@ class _LoginState extends State<Login> {
                         children: [
                            Center(
                               child: Padding(
-                            padding: EdgeInsets.only(top: 25.sp),
+                            padding: EdgeInsets.only(top: 25.h),
                             child: Text(
                               'Login',
                               style: TextStyle(
@@ -130,7 +126,7 @@ class _LoginState extends State<Login> {
                           ),
                           Padding(
                             padding:
-                                 EdgeInsets.symmetric(horizontal: 10.sp),
+                                 EdgeInsets.symmetric(horizontal: 10.w),
                             child: TextFormField(
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -144,7 +140,7 @@ class _LoginState extends State<Login> {
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
                                       color: const Color(0xff000080),
-                                      width: 1.sp,
+                                      width: 1.w,
                                     )))),
                           ),
                            SizedBox(
@@ -152,7 +148,7 @@ class _LoginState extends State<Login> {
                           ),
                           Padding(
                             padding:
-                                 EdgeInsets.symmetric(horizontal: 10.sp),
+                                 EdgeInsets.symmetric(horizontal: 10.w),
                             child: TextFormField(
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -226,8 +222,8 @@ class _LoginState extends State<Login> {
                       ))),
               Image.asset(
                 'assets/splogo.png',
-                height: 180.h,
-                width: 180.w,
+                height: 150.h,
+                width: 150.w,
               )
             ],
           ),

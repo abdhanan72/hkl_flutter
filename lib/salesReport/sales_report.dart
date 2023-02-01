@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hakl/salesReport/apicall.dart';
 import 'package:hakl/salesReport/report_sales/report_sales.dart';
 import 'package:intl/intl.dart';
@@ -43,16 +44,16 @@ class _SalesReportState extends State<SalesReport> {
         child: Scaffold(
           body: Column(
             children: [
-              const SizedBox(
-                height: 30,
+               SizedBox(
+                height: 30.h,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding:  EdgeInsets.symmetric(horizontal: 8.w),
                 child: TextField(
                   controller: fromdate,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12.r)),
                       prefixIcon: const Icon(Icons.calendar_today_outlined),
                       labelText: 'From Date'),
                   readOnly: true,
@@ -73,16 +74,16 @@ class _SalesReportState extends State<SalesReport> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
+               SizedBox(
+                height: 20.h,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding:  EdgeInsets.symmetric(horizontal: 8.w),
                 child: TextField(
                   controller: todate,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12.r)),
                       prefixIcon: const Icon(Icons.calendar_today_outlined),
                       labelText: 'To Date'),
                   readOnly: true,
@@ -105,8 +106,8 @@ class _SalesReportState extends State<SalesReport> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
+               SizedBox(
+                height: 20.h,
               ),
               ElevatedButton(
                   onPressed: () {
@@ -128,7 +129,7 @@ class _SalesReportState extends State<SalesReport> {
 
                     return Expanded(
                       child: SizedBox(
-                        height: 200,
+                        height: 200.h,
                         child: ListView.builder(
                           itemCount: data!.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -139,9 +140,9 @@ class _SalesReportState extends State<SalesReport> {
                             //   trailing: Text(datum.custName),
                             // );
                             return SizedBox(
-                              height: 80,
+                              height: 80.h,
                               child: Container(
-                                height: 100,
+                                height: 100.h,
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Column(
@@ -149,35 +150,36 @@ class _SalesReportState extends State<SalesReport> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const SizedBox(
-                                        height: 3,
-                                        width: 345,
-                                        child: Divider(thickness: 1.3,
+                                       SizedBox(
+                                        height: 3.h,
+                                        width: 345.w,
+                                        child: const Divider(thickness: 1.3,
                                           color: Colors.black,
                                         ),
                                       ),
+                                      SizedBox(height: 5.h,),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text("#: ${datum.gstinv}"),
                                           Padding(
-                                            padding: const EdgeInsets.only(right:8.0),
+                                            padding:  EdgeInsets.only(right:8.w),
                                             child: Text(
                                                   "Dt:${DateFormat('MM-dd-yyyy HH:mm').format(datum.datex)}"),
                                           )
 
                                         ],
                                       ),
-                                      const SizedBox(
-                                        height: 8,
+                                       SizedBox(
+                                        height: 12.h,
                                       ),
                                       Text(datum.custName),
-                                      const SizedBox(
-                                        height: 8,
+                                       SizedBox(
+                                        height: 12.h,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(right:3.0),
+                                        padding:  EdgeInsets.only(right:3.w),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -185,7 +187,7 @@ class _SalesReportState extends State<SalesReport> {
                                             Text("Amt: ${datum.invamt}"),
                                             Text("Cost: ${datum.cost}"),
                                             Padding(
-                                              padding: const EdgeInsets.only(right:8.0),
+                                              padding:  EdgeInsets.only(right:8.w),
                                               child: Text("Profit: ${datum.profit}"),
                                             ),
                                           ],

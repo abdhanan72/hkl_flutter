@@ -159,11 +159,11 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
                                           ),
                                         ),
                                          SizedBox(
-                                          height: 10.h,
+                                          height: 15.h,
                                         ),
                                         Text(datum.custName),
                                          SizedBox(
-                                          height: 8.h,
+                                          height: 15.h,
                                         ),
                                         Padding(
                                           padding:

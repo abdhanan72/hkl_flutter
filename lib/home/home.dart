@@ -21,8 +21,8 @@ class HomePage extends StatelessWidget {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: const Text('Logout',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            title:  Text('Logout',
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
             content: Column(
               children: [
                 Lottie.asset('assets/90919-logout.json'),
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                 height: 30.h,
               ),
               Padding(
-                padding:  EdgeInsets.all(7.sp),
+                padding:  EdgeInsets.all(2.r),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
                             ));
                       },
                       child: Padding(
-                        padding:  EdgeInsets.all(8.0.sp),
+                        padding:  EdgeInsets.all(8.0.r),
                         child: Column(
                           children: [
                             Image.asset(
@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerSalesSummary())),
                       child: Padding(
-                        padding:  EdgeInsets.all(8.sp),
+                        padding:  EdgeInsets.all(10.r),
                         child: Column(
                           children: [
                             Image.asset(
@@ -141,13 +141,11 @@ class HomePage extends StatelessWidget {
                               height: 10.h,
                             ),
                             Text(
-                              'Customer',
+                              'Customer Sales \nSummary',
                               style: TextStyle(color: Colors.grey.shade800,fontSize: 15.sp),
+                              textAlign: TextAlign.center,
                             ),
-                            Text(
-                              'Sales Summary',
-                              style: TextStyle(color: Colors.grey.shade800, fontSize: 15.sp),
-                            )
+                            
                           ],
                         ),
                       ),
@@ -155,7 +153,7 @@ class HomePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () => Navigator.push(context,MaterialPageRoute(builder:(context) => const ItemSalesSummary())),
                       child: Padding(
-                        padding:  EdgeInsets.all(8.sp),
+                        padding:  EdgeInsets.all(10.r),
                         child: Column(
                           children: [
                             Image.asset(
@@ -167,15 +165,11 @@ class HomePage extends StatelessWidget {
                               height: 10.h,
                             ),
                             Text(
-                              'Items',
+                              'Item \nSales Summary',
                               style: TextStyle(
                                   color: Colors.grey.shade800, fontSize: 15.sp),
+                              textAlign: TextAlign.center,
                             ),
-                            Text(
-                              'Sales Summary',
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 15.sp),
-                            )
                           ],
                         ),
                       ),
@@ -184,12 +178,12 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:  EdgeInsets.all(5.sp),
+                padding:  EdgeInsets.all(2.r),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.all(8.sp),
+                      padding:  EdgeInsets.all(8.r),
                       child: Column(
                         children: [
                           Image.asset(
@@ -200,15 +194,12 @@ class HomePage extends StatelessWidget {
                            SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            'Current Stock',
+                         Text(
+                            'Current Stock \nReport',
                             style: TextStyle(
                                 color: Colors.grey.shade800, fontSize: 15.sp),
+                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            'Report',
-                            style: TextStyle(color: Colors.grey.shade800,fontSize: 15.sp),
-                          )
                         ],
                       ),
                     ),
@@ -220,11 +211,11 @@ class HomePage extends StatelessWidget {
                         await pref.clear();
                       },
                       child: Padding(
-                        padding:  EdgeInsets.all(8.sp),
+                        padding:  EdgeInsets.all(8.r),
                         child: Column(
                           children: [
                             Padding(
-                              padding:  EdgeInsets.only(left: 10.sp),
+                              padding:  EdgeInsets.only(left: 10.r),
                               child: Image.asset(
                                 'assets/logout.png',
                                 height: 80.h,

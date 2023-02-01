@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hakl/Itemsummary/api3.dart';
 import 'package:hakl/Itemsummary/model/itemsalesum.dart';
 import 'package:intl/intl.dart';
@@ -43,16 +44,16 @@ class _ItemSalesSummaryState extends State<ItemSalesSummary> {
         child: Scaffold(
           body: Column(
             children: [
-              const SizedBox(
-                height: 30,
+               SizedBox(
+                height: 30.h,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding:  EdgeInsets.symmetric(horizontal: 8.w),
                 child: TextField(
                   controller: fromdate,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12.r)),
                       prefixIcon: const Icon(Icons.calendar_today_outlined),
                       labelText: 'From Date'),
                   readOnly: true,
@@ -73,16 +74,16 @@ class _ItemSalesSummaryState extends State<ItemSalesSummary> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
+               SizedBox(
+                height: 20.h,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding:  EdgeInsets.symmetric(horizontal: 8.w),
                 child: TextField(
                   controller: todate,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12.r)),
                       prefixIcon: const Icon(Icons.calendar_today_outlined),
                       labelText: 'To Date'),
                   readOnly: true,
@@ -105,8 +106,8 @@ class _ItemSalesSummaryState extends State<ItemSalesSummary> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
+               SizedBox(
+                height: 20.h,
               ),
               ElevatedButton(
                   onPressed: () {
@@ -129,7 +130,7 @@ class _ItemSalesSummaryState extends State<ItemSalesSummary> {
 
                       return Expanded(
                         child: SizedBox(
-                          height: 200,
+                          height: 200.h,
                           child: ListView.builder(
                             itemCount: data!.length,
                             itemBuilder: (BuildContext context, int index) {
@@ -140,45 +141,47 @@ class _ItemSalesSummaryState extends State<ItemSalesSummary> {
                               //   trailing: Text(datum.custName),
                               // );
                               return SizedBox(
-                                height: 100,
+                                height: 100.h,
                                 child: Container(
-                                  height: 110,
+                                  height: 110.h,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
+                                    padding:  EdgeInsets.only(left: 8.w),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const SizedBox(
-                                          height: 3,
-                                          width: 345,
-                                          child: Divider(
+                                         SizedBox(
+                                          height: 3.h,
+                                          width: 345.w,
+                                          child: const Divider(
                                             thickness: 1.3,
                                             color: Colors.black,
                                           ),
+                                          
                                         ),
+                                        SizedBox(height: 5.h,),
                                         Text("#: ${datum.itemCode}"),
-                                      const   SizedBox(height: 5,),
+                                         SizedBox(height: 10.h,),
                                         Text(datum.itemName),
-                                       const  SizedBox(
-                                          height: 5,
+                                         SizedBox(
+                                          height: 10.h,
                                         ),
                                         Row(
                                           
                                           children: [
                                             Text("Qty: ${datum.tqty}"),
-                                            const SizedBox(width: 65,),
+                                             SizedBox(width: 82.w,),
                                             Text("Amt: ${datum.amt}")
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 8,
+                                         SizedBox(
+                                          height: 10.h,
                                         ),
                                         Row(
                                           children: [
                                             Text("Cost: ${datum.cost}"),
-                                            const SizedBox(
-                                              width: 65,
+                                             SizedBox(
+                                              width: 65.w,
                                             ),
                                             Text("Margin: ${datum.margin}"),
                                           ],
