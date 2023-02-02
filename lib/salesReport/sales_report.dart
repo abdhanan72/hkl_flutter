@@ -49,7 +49,7 @@ class _SalesReportState extends State<SalesReport> {
                 height:mediaquery.size.height*0.04 ,
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal:mediaquery.size.width*0.035),
+                padding:  const EdgeInsets.symmetric(horizontal:12),
                 child: TextField(
                   controller: fromdate,
                   decoration: InputDecoration(
@@ -79,7 +79,7 @@ class _SalesReportState extends State<SalesReport> {
                 height:mediaquery.size.height*0.04
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: mediaquery.size.width*0.035),
+                padding:  const EdgeInsets.symmetric(horizontal: 12),
                 child: TextField(
                   controller: todate,
                   decoration: InputDecoration(
@@ -139,7 +139,7 @@ class _SalesReportState extends State<SalesReport> {
                           //   trailing: Text(datum.custName),
                           // );
                           return SizedBox(
-                             height:mediaquery.size.height*0.13,
+                             height:mediaquery.size.height*0.15,
                             child: Padding(
                               padding:  EdgeInsets.only(left: mediaquery.size.width*0.01,right: mediaquery.size.width*0.01),
                               child: Column(
@@ -147,29 +147,26 @@ class _SalesReportState extends State<SalesReport> {
                                 crossAxisAlignment:
                                     CrossAxisAlignment.start,
                                 children: [
-                                   Divider(thickness: mediaquery.size.width*0.0025,
+                                   Divider(thickness: mediaquery.size.height*0.00125,
                                      color: Colors.black,
                                    ),
-                                  SizedBox(height: mediaquery.size.height*0.001),
+                                  SizedBox(height: mediaquery.size.height*0.002),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text("#: ${datum.gstinv}",style: TextStyle(fontSize: mediaquery.size.height*0.02),),
-                                      Padding(
-                                        padding:  EdgeInsets.only(right:mediaquery.size.width*0.01),
-                                        child: Text(
-                                              "Dt:${DateFormat('MM-dd-yyyy HH:mm').format(datum.datex)}",style: TextStyle(fontSize: mediaquery.size.height*0.02)),
-                                      )
+                                      Text(
+                                            "Dt:${DateFormat('MM-dd-yyyy HH:mm').format(datum.datex)}",style: TextStyle(fontSize: mediaquery.size.height*0.02))
 
                                     ],
                                   ),
                                    SizedBox(
-                                    height:mediaquery.size.width*0.03,
+                                    height:mediaquery.size.height*0.025,
                                   ),
                                   Text(datum.custName,style: TextStyle(fontSize: mediaquery.size.height*0.02)),
                                    SizedBox(
-                                    height:mediaquery.size.width*0.03,
+                                    height:mediaquery.size.height*0.025,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -177,7 +174,7 @@ class _SalesReportState extends State<SalesReport> {
                                     children: [
                                       Text("Amt: ${datum.invamt}",style: TextStyle(fontSize: mediaquery.size.height*0.02)),
                                       Text("Cost: ${datum.cost}",style: TextStyle(fontSize: mediaquery.size.height*0.02)),
-                                      Text("Profit: ${datum.profit}"),
+                                      Text("Profit: ${datum.profit}",style: TextStyle(fontSize: mediaquery.size.height*0.02)),
                                     ],
                                   ),
                                   
