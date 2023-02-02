@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaquery = MediaQuery.of(context);
     Future<void> _clearData() async {
       final prefs = await SharedPreferences.getInstance();
       await prefs.clear();
@@ -24,10 +25,13 @@ class HomePage extends StatelessWidget {
         builder: (context) {
           return CupertinoAlertDialog(
             title: Text('Logout',
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: mediaquery.size.height * 0.03.sp,
+                    fontWeight: FontWeight.bold)),
             content: Column(
               children: [
-                Lottie.asset('assets/90919-logout.json'),
+                Lottie.asset('assets/90919-logout.json',
+                    height: mediaquery.size.height * 0.1),
                 const Text(
                   'Are you sure you want to logout?',
                 )
@@ -63,33 +67,34 @@ class HomePage extends StatelessWidget {
           body:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             SizedBox(
-              height: 25.h,
+              height: mediaquery.size.height * 0.025,
             ),
             Center(
               child: SizedBox(
-                  height: 150.h,
-                  width: 340.w,
+                  height: mediaquery.size.height * 0.22,
+                  width: mediaquery.size.width * 0.95,
                   child: Card(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.r)),
+                        borderRadius: BorderRadius.circular(
+                            mediaquery.size.height * 0.03)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                            height: 90.h,
-                            width: 90.w,
+                            height: mediaquery.size.height * 0.16,
+                            width: mediaquery.size.width * 0.35,
                             child: Image.asset('assets/hklogo.png')),
                         Text(
                           'ADMIN POTATALLO',
                           style: TextStyle(
-                              fontSize: 25.sp, color: const Color(0xff000080)),
+                              fontSize: mediaquery.size.height * 0.035, color: const Color(0xff000080)),
                         )
                       ],
                     ),
                   )),
             ),
             SizedBox(
-              height: 12.h,
+              height: mediaquery.size.height * 0.025,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -125,7 +130,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 30.h,
+              height: mediaquery.size.height * 0.038,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -160,14 +165,15 @@ class Menuitem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaquery = MediaQuery.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 60.h, width: 60.h, child: Image.asset(imagePath)),
+        SizedBox(height:mediaquery.size.height * 0.1, width: mediaquery.size.width*0.22, child: Image.asset(imagePath)),
         SizedBox(
-          height: 6.h,
+          height: mediaquery.size.height*0.01,
         ),
-        Text(text)
+        Text(text,style: TextStyle(fontSize: mediaquery.size.height*0.020),)
       ],
     );
   }
