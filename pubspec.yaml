@@ -47,11 +47,7 @@ dependencies:
   lottie_flutter: ^0.2.0
   lottie: ^2.2.0
   shared_preferences: ^2.0.16
-  json_annotation: ^4.8.0
-  build_runner_core: ^7.2.7
-  json_serializable: ^6.6.0
-  dio: ^4.0.6
-  pdf: ^3.9.0
+  sizer: ^2.0.15
   flutter_screenutil: ^5.6.1
 
 dev_dependencies:

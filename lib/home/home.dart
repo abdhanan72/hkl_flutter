@@ -6,12 +6,18 @@ import 'package:hakl/salesReport/sales_report.dart';
 import 'package:lottie/lottie.dart';
 import '../CustomerSummary/customersummary.dart';
 import '../Itemsummary/itemsummary.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _clearData() async {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+    }
+
     void showdialog() {
       showDialog(
         context: context,
@@ -31,6 +37,7 @@ class HomePage extends StatelessWidget {
               MaterialButton(
                 onPressed: () {
                   Navigator.pop(context, true);
+                  _clearData();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const Login()));
                 },
@@ -53,86 +60,88 @@ class HomePage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.grey.shade300,
-          body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-               SizedBox(
-          height: 25.h,
-              ),
-              Center(
-          child: SizedBox(
-              height: 150.h,
-              width: 340.w,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.r)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                        height: 90.h,
-                        width: 90.w,
-                        child: Image.asset('assets/hklogo.png')),
-                    Text(
-                      'ADMIN POTATALLO',
-                      style: TextStyle(fontSize: 25.sp,color: const  Color(0xff000080)),
-                    )
-                  ],
-                ),
-              )),
-              ),
-              SizedBox(
-          height: 12.h,
-              ),
-              Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            GestureDetector(
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SalesReport(),
-                    )),
-                child: const Menuitem(
-                    imagePath: 'assets/sales.png', text: 'Sales Report')),
-            GestureDetector(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CustomerSalesSummary(),
-                  )),
-              child: const Menuitem(
-                  imagePath: 'assets/target.png',
-                  text: 'Customer sales \n     Summary'),
+          body:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            SizedBox(
+              height: 25.h,
             ),
-            GestureDetector(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ItemSalesSummary(),
+            Center(
+              child: SizedBox(
+                  height: 150.h,
+                  width: 340.w,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.r)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            height: 90.h,
+                            width: 90.w,
+                            child: Image.asset('assets/hklogo.png')),
+                        Text(
+                          'ADMIN POTATALLO',
+                          style: TextStyle(
+                              fontSize: 25.sp, color: const Color(0xff000080)),
+                        )
+                      ],
+                    ),
                   )),
-              child: const Menuitem(
-                  imagePath: 'assets/deliverybox.png',
-                  text: 'Item Sales   \nSummary'),
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SalesReport(),
+                        )),
+                    child: const Menuitem(
+                        imagePath: 'assets/sales.png', text: 'Sales Report')),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CustomerSalesSummary(),
+                      )),
+                  child: const Menuitem(
+                      imagePath: 'assets/target.png',
+                      text: 'Customer sales \n     Summary'),
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ItemSalesSummary(),
+                      )),
+                  child: const Menuitem(
+                      imagePath: 'assets/deliverybox.png',
+                      text: 'Item Sales   \nSummary'),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 30.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Menuitem(
+                    imagePath: 'assets/warehouse.png',
+                    text: 'Current Stock \n      Report'),
+                GestureDetector(
+                    onTap: () {
+                      showdialog();
+                    },
+                    child: const Menuitem(
+                        imagePath: 'assets/logout.png', text: 'Logout'))
+              ],
             )
-          ],
-              ),
-              SizedBox(
-          height: 30.h,
-              ),
-              Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Menuitem(
-                imagePath: 'assets/warehouse.png',
-                text: 'Current Stock \n      Report'),
-            GestureDetector(
-                onTap: () {
-                  showdialog();
-                },
-                child: const Menuitem(
-                    imagePath: 'assets/logout.png', text: 'Logout'))
-          ],
-              )
-            ]),
+          ]),
         ),
       ),
     );
