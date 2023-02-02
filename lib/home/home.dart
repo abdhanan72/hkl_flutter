@@ -1,27 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hakl/login/login.dart';
 import 'package:hakl/salesReport/sales_report.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../CustomerSummary/customersummary.dart';
 import '../Itemsummary/itemsummary.dart';
-import '../Itemsummary/model/itemsalesum.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    void _showdialog() {
+    void showdialog() {
       showDialog(
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title:  Text('Logout',
+            title: Text('Logout',
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
             content: Column(
               children: [
@@ -36,7 +32,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context, true);
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Login()));
+                      MaterialPageRoute(builder: (context) => const Login()));
                 },
                 child: const Text('Yes'),
               ),
@@ -57,190 +53,113 @@ class HomePage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.grey.shade300,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+          body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                SizedBox(
-                height: 10.h,
+          height: 25.h,
               ),
               Center(
-                  child: SizedBox(
-                      height: 150.h,
-                      width: 340.w,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/hklogo.png',
-                              height: 90.h,
-                              width: 90.h,
-                            ),
-                             SizedBox(
-                              height: 15.h,
-                            ),
-                             Text(
-                              'ADMIN POTATALLO',
-                              style: TextStyle(
-                                  color: const Color(0xff000080), fontSize: 25.sp),
-                            )
-                          ],
-                        ),
-                      ))),
-               SizedBox(
-                height: 30.h,
-              ),
-              Padding(
-                padding:  EdgeInsets.all(2.r),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+          child: SizedBox(
+              height: 150.h,
+              width: 340.w,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.r)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SalesReport(),
-                            ));
-                      },
-                      child: Padding(
-                        padding:  EdgeInsets.all(8.0.r),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/sales.png',
-                              height: 80.h,
-                              width: 80.w,
-                            ),
-                             SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              'Sales Report',
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 15.sp),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomerSalesSummary())),
-                      child: Padding(
-                        padding:  EdgeInsets.all(10.r),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/target.png',
-                              height: 80.h,
-                              width: 80.w,
-                            ),
-                             SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              'Customer Sales \nSummary',
-                              style: TextStyle(color: Colors.grey.shade800,fontSize: 15.sp),
-                              textAlign: TextAlign.center,
-                            ),
-                            
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.push(context,MaterialPageRoute(builder:(context) => const ItemSalesSummary())),
-                      child: Padding(
-                        padding:  EdgeInsets.all(10.r),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/deliverybox.png',
-                              height: 80.h,
-                              width: 80.w,
-                            ),
-                             SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              'Item \nSales Summary',
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 15.sp),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    SizedBox(
+                        height: 90.h,
+                        width: 90.w,
+                        child: Image.asset('assets/hklogo.png')),
+                    Text(
+                      'ADMIN POTATALLO',
+                      style: TextStyle(fontSize: 25.sp,color: const  Color(0xff000080)),
+                    )
                   ],
                 ),
+              )),
               ),
-              Padding(
-                padding:  EdgeInsets.all(2.r),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:  EdgeInsets.all(8.r),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/warehouse.png',
-                            height: 80.h,
-                            width: 80.w,
-                          ),
-                           SizedBox(
-                            height: 10.h,
-                          ),
-                         Text(
-                            'Current Stock \nReport',
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 15.sp),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        _showdialog();
-                        SharedPreferences pref =
-                            await SharedPreferences.getInstance();
-                        await pref.clear();
-                      },
-                      child: Padding(
-                        padding:  EdgeInsets.all(8.r),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:  EdgeInsets.only(left: 10.r),
-                              child: Image.asset(
-                                'assets/logout.png',
-                                height: 80.h,
-                                width: 80.w,
-                              ),
-                            ),
-                             SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              'Logout',
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 15.sp),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              SizedBox(
+          height: 12.h,
               ),
-            ],
-          ),
+              Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SalesReport(),
+                    )),
+                child: const Menuitem(
+                    imagePath: 'assets/sales.png', text: 'Sales Report')),
+            GestureDetector(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CustomerSalesSummary(),
+                  )),
+              child: const Menuitem(
+                  imagePath: 'assets/target.png',
+                  text: 'Customer sales \n     Summary'),
+            ),
+            GestureDetector(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ItemSalesSummary(),
+                  )),
+              child: const Menuitem(
+                  imagePath: 'assets/deliverybox.png',
+                  text: 'Item Sales   \nSummary'),
+            )
+          ],
+              ),
+              SizedBox(
+          height: 30.h,
+              ),
+              Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Menuitem(
+                imagePath: 'assets/warehouse.png',
+                text: 'Current Stock \n      Report'),
+            GestureDetector(
+                onTap: () {
+                  showdialog();
+                },
+                child: const Menuitem(
+                    imagePath: 'assets/logout.png', text: 'Logout'))
+          ],
+              )
+            ]),
         ),
       ),
+    );
+  }
+}
+
+class Menuitem extends StatelessWidget {
+  final String imagePath;
+  final String text;
+
+  const Menuitem({
+    super.key,
+    required this.imagePath,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(height: 60.h, width: 60.h, child: Image.asset(imagePath)),
+        SizedBox(
+          height: 6.h,
+        ),
+        Text(text)
+      ],
     );
   }
 }
