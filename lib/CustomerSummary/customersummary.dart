@@ -38,6 +38,7 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
 
   @override
   Widget build(BuildContext context) {
+    var mediaquery = MediaQuery.of(context);
     return Container(
       color: const Color(0xff000080),
       child: SafeArea(
@@ -45,15 +46,15 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
           body: Column(
             children: [
                SizedBox(
-                height: 30.h,
+                height: mediaquery.size.height * 0.04,
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                padding:  const EdgeInsets.symmetric(horizontal:12),
                 child: TextField(
                   controller: fromdate,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r)),
+                          borderRadius: BorderRadius.circular(12)),
                       prefixIcon: const Icon(Icons.calendar_today_outlined),
                       labelText: 'From Date'),
                   readOnly: true,
@@ -75,15 +76,15 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
                 ),
               ),
                SizedBox(
-                height: 20.h,
+                 height: mediaquery.size.height * 0.04,
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                padding:  const EdgeInsets.symmetric(horizontal: 12),
                 child: TextField(
                   controller: todate,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r)),
+                          borderRadius: BorderRadius.circular(12)),
                       prefixIcon: const Icon(Icons.calendar_today_outlined),
                       labelText: 'To Date'),
                   readOnly: true,
@@ -107,7 +108,7 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
                 ),
               ),
                SizedBox(
-                height: 20.h,
+                 height: mediaquery.size.height * 0.04,
               ),
               ElevatedButton(
                   onPressed: () {
@@ -129,67 +130,66 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
                       final data = snapshot.data?.data;
 
                       return Expanded(
-                        child: SizedBox(
-                          height: 200.h,
-                          child: ListView.builder(
-                            itemCount: data!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final Datum datum = data[index];
-                              // return ListTile(
-                              //   title: Text(datum.the0),
-                              //   subtitle: Text(datum.the1),
-                              //   trailing: Text(datum.custName),
-                              // );
-                              return SizedBox(
-                                height: 80.h,
-                                child: Container(
-                                  height: 100.h,
-                                  child: Padding(
-                                    padding:  EdgeInsets.only(left: 8.w),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                        child: ListView.builder(
+                          itemCount: data!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final Datum datum = data[index];
+                            // return ListTile(
+                            //   title: Text(datum.the0),
+                            //   subtitle: Text(datum.the1),
+                            //   trailing: Text(datum.custName),
+                            // );
+                            return SizedBox(
+                              height: mediaquery.size.height*0.1,
+                              child: Padding(
+                                padding:  EdgeInsets.only(left: mediaquery.size.width*0.02,right:mediaquery.size.width*0.02, ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                     SizedBox(
+                                      height: mediaquery.size.height * 0.01,
+                                      width: mediaquery.size.width * 0.95,
+                                      child:  Divider(
+                                        thickness: mediaquery.size.height * 0.00125,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        height: mediaquery.size.height * 0.01),
+                                    Text(datum.custName,
+                                        style: TextStyle(
+                                            fontSize: mediaquery.size.height *
+                                                0.018)),
+                                      SizedBox(
+                                        height: mediaquery.size.height * 0.025),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                         SizedBox(
-                                          height: 3.h,
-                                          width: 345.w,
-                                          child: const Divider(
-                                            thickness: 1.3,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                         SizedBox(
-                                          height: 15.h,
-                                        ),
-                                        Text(datum.custName),
-                                         SizedBox(
-                                          height: 15.h,
-                                        ),
-                                        Padding(
-                                          padding:
-                                               EdgeInsets.only(right: 3.w),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("Amt: ${datum.invamt}"),
-                                              Text("Cost: ${datum.cost}"),
-                                              Padding(
-                                                padding:  EdgeInsets.only(
-                                                    right: 8.w),
-                                                child: Text(
-                                                    "Profit: ${datum.profit}"),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                        Text("Amt: ${datum.invamt}",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    mediaquery.size.height *
+                                                        0.018)),
+                                        Text("Cost: ${datum.cost}",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    mediaquery.size.height *
+                                                        0.018)),
+                                        Text(
+                                            "Profit: ${datum.profit}",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    mediaquery.size.height *
+                                                        0.018)),
                                       ],
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       );
                     } else if (snapshot.hasError) {

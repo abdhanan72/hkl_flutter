@@ -155,16 +155,16 @@ class _SalesReportState extends State<SalesReport> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("#: ${datum.gstinv}",style: TextStyle(fontSize: mediaquery.size.height*0.02),),
+                                      Text("#: ${datum.gstinv}",style: TextStyle(fontSize: mediaquery.size.height*0.018),),
                                       Text(
-                                            "Dt:${DateFormat('MM-dd-yyyy HH:mm').format(datum.datex)}",style: TextStyle(fontSize: mediaquery.size.height*0.02))
+                                            "Dt:${DateFormat('MM-dd-yyyy HH:mm').format(datum.datex)}",style: TextStyle(fontSize: mediaquery.size.height*0.018))
 
                                     ],
                                   ),
                                    SizedBox(
                                     height:mediaquery.size.height*0.025,
                                   ),
-                                  Text(datum.custName,style: TextStyle(fontSize: mediaquery.size.height*0.02)),
+                                  Text(datum.custName,style: TextStyle(fontSize: mediaquery.size.height*0.018)),
                                    SizedBox(
                                     height:mediaquery.size.height*0.025,
                                   ),
@@ -172,9 +172,9 @@ class _SalesReportState extends State<SalesReport> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Amt: ${datum.invamt}",style: TextStyle(fontSize: mediaquery.size.height*0.02)),
-                                      Text("Cost: ${datum.cost}",style: TextStyle(fontSize: mediaquery.size.height*0.02)),
-                                      Text("Profit: ${datum.profit}",style: TextStyle(fontSize: mediaquery.size.height*0.02)),
+                                      Text("Amt: ${datum.invamt}",style: TextStyle(fontSize: mediaquery.size.height*0.018)),
+                                      Text("Cost: ${datum.cost}",style: TextStyle(fontSize: mediaquery.size.height*0.018)),
+                                      Text("Profit: ${datum.profit}",style: TextStyle(fontSize: mediaquery.size.height*0.018)),
                                     ],
                                   ),
                                   
