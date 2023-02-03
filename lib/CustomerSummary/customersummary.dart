@@ -139,7 +139,7 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
                             //   subtitle: Text(datum.the1),
                             //   trailing: Text(datum.custName),
                             // );
-                            return SizedBox(
+                            return SizedBox( 
                               height: mediaquery.size.height*0.1,
                               child: Padding(
                                 padding:  EdgeInsets.only(left: mediaquery.size.width*0.02,right:mediaquery.size.width*0.02, ),
