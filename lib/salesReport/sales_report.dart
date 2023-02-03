@@ -141,7 +141,7 @@ class _SalesReportState extends State<SalesReport> {
                           return SizedBox(
                              height:mediaquery.size.height*0.15,
                             child: Padding(
-                              padding:  EdgeInsets.only(left: mediaquery.size.width*0.01,right: mediaquery.size.width*0.01),
+                              padding:  EdgeInsets.only(left: mediaquery.size.width*0.02,right: mediaquery.size.width*0.02),
                               child: Column(
                                 
                                 crossAxisAlignment:

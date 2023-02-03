@@ -147,14 +147,10 @@ class _CustomerSalesSummaryState extends State<CustomerSalesSummary> {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.start,
                                   children: [
-                                     SizedBox(
-                                      height: mediaquery.size.height * 0.01,
-                                      width: mediaquery.size.width * 0.95,
-                                      child:  Divider(
-                                        thickness: mediaquery.size.height * 0.00125,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                                     Divider(
+                                       thickness: mediaquery.size.height * 0.00125,
+                                       color: Colors.black,
+                                     ),
                                     SizedBox(
                                         height: mediaquery.size.height * 0.01),
                                     Text(datum.custName,
